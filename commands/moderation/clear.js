@@ -17,9 +17,9 @@ module.exports = class Clear extends Comando {
     async run(client, message, args) {
         const numberToClear = Number(args[0]).toFixed(0)
         if(isNaN(numberToClear) || numberToClear < 2 || numberToClear > 100) return message.channel.send(message.author, new MissArguments(client.commands.get("clear")));
-        const messagesToClear = await message.channel.messages.fetch({ limit: numberToClear }).then(msg => msg.filter(x => !x.pinned && x.id !== message.id));
+        const messagesToClear = await message.channel.messages.fetch({ limit: numberToClear }).then(msg => msg.filter(x => !x.pinned));
         const botMessage = await message.channel.send(`Limpando \`${numberToClear}\` mensagens...`);
-        await message.channel.bulkDelete(messagesToClear, { filterOld: true}).then(async msg => {
+        await message.channel.bulkDelete(messagesToClear, { filterOld: true }).then(async msg => {
             const clearedMessages = msg.size,
              oldMessages = messagesToClear.size - clearedMessages,
               pinnedMessages = numberToClear - messagesToClear.size,
