@@ -1,0 +1,1 @@
+Hey! Esse repositório é de um robô já hospedado no Discord pelo usuário Lion#6221. Copiar códigos pode prejudicar a si mesmo, já que não estará aprendendo nada.
