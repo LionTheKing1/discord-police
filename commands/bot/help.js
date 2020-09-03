@@ -10,7 +10,7 @@ module.exports = class Help extends Comando {
             aliases: ["ajuda"],
             description: "Veja todos os meus comandos!"
         });
-    }
+    } // Automatic Help Command
 
     run(client, message, args) {
         const prefix = client.commandHandler.prefix || "?"
