@@ -45,7 +45,7 @@ module.exports = class Banir extends Comando {
         }
 
         const serverConfig = await (await client.database.servers).findServer(message.guild.id)
-        if(await serverConfig.punishmentLogs.enabled && (userToBan || client.users.cache.get(args[0]))) { // em breve isso daqui irá virar uma função
+        if(await serverConfig.punishmentLogs.enabled) { // em breve isso daqui irá virar uma função
             const punishmentChannel = message.guild.channels.cache.get(serverConfig.punishmentLogs.channelID);
 
             if(!punishmentChannel) {
