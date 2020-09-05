@@ -44,7 +44,7 @@ module.exports = class Banir extends Comando {
             if(!userToBan.user.bot) await userToBan.send(DirectMessage(message, userToBan, message.guild, reason))
         }
 
-        const serverConfig = await (await client.database.servers).findServer(message.guild.id)
+        const serverConfig = await client.database.servers.findServer(message.guild.id)
         if(await serverConfig.punishmentLogs.enabled) { // em breve isso daqui irá virar uma função
             const punishmentChannel = message.guild.channels.cache.get(serverConfig.punishmentLogs.channelID);
 
@@ -56,18 +56,16 @@ module.exports = class Banir extends Comando {
                 }
 
                 await toChange.save()
-                await (await client.database.servers).deleteServer(message.guild.id)
-                await (await client.database.servers).addServer(toChange)
+                await client.database.servers.deleteServer(message.guild.id)
+                await client.database.servers.addServer(toChange)
                 
             }
             else {
                 punishmentChannel.send(new PunishmentLogs('Banido', message, userToBan || client.users.cache.get(args[0]), reason));
             }
-
+        }
             await message.guild.members.ban(userToBan || args[0], { reason: `Banido por ${message.author.tag}, motivo: \"${reason}\"`});
             return message.reply(`usuário punido com sucesso!`);
-
-        }
-
+        
     }
 }

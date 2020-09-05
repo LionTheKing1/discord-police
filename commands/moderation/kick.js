@@ -44,10 +44,10 @@ module.exports = class Banir extends Comando {
         } 
         else return message.reply(`procurei por \`${args[0]}\` e não achei! Certeza que é um usuário válido? :thinking:`);
 
-        const serverConfig = await (await client.database.servers).findServer(message.guild.id)
+        const serverConfig = await client.database.servers.findServer(message.guild.id)
         if(await serverConfig.punishmentLogs.enabled) { // em breve isso daqui irá virar uma função
             const punishmentChannel = message.guild.channels.cache.get(serverConfig.punishmentLogs.channelID);
-
+            
             if(!punishmentChannel) {
                 const changeConfig = await serverDatabase.find({ "serverID": message.guild.id });
                 const toChange = changeConfig.punishmentLogs = {
@@ -63,11 +63,11 @@ module.exports = class Banir extends Comando {
             else {
                 punishmentChannel.send(new PunishmentLogs('Kickado', message, userToKick, reason));
             }
-
+        }
             await userToKick.kick([`Kickado por ${message.author.tag}, motivo: \"${reason}\"`]);
             return message.reply(`usuário punido com sucesso!`);
 
-        }
+        
 
     }
 }
