@@ -44,7 +44,7 @@ module.exports = class Banir extends Comando {
         } 
         else return message.reply(`procurei por \`${args[0]}\` e não achei! Certeza que é um usuário válido? :thinking:`);
 
-        const serverConfig = await client.database.servers.findServer(message.guild.id)
+        const serverConfig = await (await client.database.servers).findServer(message.guild.id)
         if(await serverConfig.punishmentLogs.enabled) { // em breve isso daqui irá virar uma função
             const punishmentChannel = message.guild.channels.cache.get(serverConfig.punishmentLogs.channelID);
 
@@ -56,8 +56,8 @@ module.exports = class Banir extends Comando {
                 }
 
                 await toChange.save()
-                await client.database.servers.deleteServer(message.guild.id)
-                await client.database.servers.addServer(toChange)
+                await (await client.database.servers).deleteServer(message.guild.id)
+                await (await client.database.servers).addServer(toChange)
                 
             }
             else {
