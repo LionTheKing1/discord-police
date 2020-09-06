@@ -84,7 +84,7 @@ module.exports.PunishmentLogs = class PunishmentLogs extends MessageEmbed {
         this.setColor("RED")
         this.setTitle(`${member.username || member.user.username} | ${punishment}`)
         this.setDescription(`O usuário foi ${punishment.toLowerCase()} por quebrar as regras do servidor. Isso que dá infringir regras por aí! 😡`)
-        this.addField(`Tag do usuário`, `\`\`${member.user.tag || member.tag}\`\``, true)
+        this.addField(`Tag do usuário`, `\`\`${member.tag || member.user.tag}\`\``, true)
         this.addField(`ID do usuário`, `\`\`${member.id}\`\``, true)
         this.addField(`Quem puniu`, `\`\`${admin.author.tag || "Não sei :thinking:"}\`\``, true)
         this.addField(`Motivo`, `\`\`${reason}\`\``, false)
