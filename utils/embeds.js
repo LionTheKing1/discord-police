@@ -88,6 +88,6 @@ module.exports.PunishmentLogs = class PunishmentLogs extends MessageEmbed {
         this.addField(`ID do usuário`, `\`\`${member.id}\`\``, true)
         this.addField(`Quem puniu`, `\`\`${admin.author.tag || "Não sei :thinking:"}\`\``, true)
         this.addField(`Motivo`, `\`\`${reason}\`\``, false)
-        this.setThumbnail(member.user.displayAvatarURL() || member.displayAvatarURL())
+        this.setThumbnail(member.displayAvatarURL() || member.user.displayAvatarURL())
     }
 }
