@@ -10,12 +10,12 @@ module.exports = class loginDatabase {
     }
 
     async init() {
-        await connect(this.client.config.mongoose.login, { useNewUrlParser: true, useUnifiedTopology: true })
-        this.servers = new serverManager(this.client);
-        new roleManager(this.client);
-
-        console.log("Success in DB!");
-        this.ready()
+        await connect(this.client.config.mongoose.login, { useNewUrlParser: true, useUnifiedTopology: true }).then(() => {
+            console.log("Success in DB!");
+            new roleManager(this.client);
+            this.servers = new serverManager(this.client);
+            this.ready()
+        }).catch(error => console.log(error))
     }
 
         

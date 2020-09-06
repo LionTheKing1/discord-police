@@ -18,10 +18,8 @@ module.exports = class Teste extends Comando {
         })
     }
     async run(client, message, args) {
+        const serverConfig = require('../../database/models/serverconfig.js');
         
-        const messageToAnalyse = await message.channel.messages.fetch("750830030422147082");
-        const reactions = await messageToAnalyse.reactions
-
-        console.log(reactions.users)
+        console.log(await serverConfig.find({}))
     }
 }
