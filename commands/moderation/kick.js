@@ -61,7 +61,7 @@ module.exports = class Banir extends Comando {
                 
             }
             else {
-                punishmentChannel.send(new PunishmentLogs('Kickado', message, userToKick, reason));
+                punishmentChannel.send(new PunishmentLogs('Kickado', message, userToKick.user, reason));
             }
         }
             await userToKick.kick([`Kickado por ${message.author.tag}, motivo: \"${reason}\"`]);

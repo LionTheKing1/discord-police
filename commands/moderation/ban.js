@@ -61,7 +61,7 @@ module.exports = class Banir extends Comando {
                 
             }
             else {
-                punishmentChannel.send(new PunishmentLogs('Banido', message, userToBan || client.users.cache.get(args[0]), reason));
+                punishmentChannel.send(new PunishmentLogs('Banido', message, userToBan.user || client.users.cache.get(args[0]), reason));
             }
         }
             await message.guild.members.ban(userToBan || args[0], { reason: `Banido por ${message.author.tag}, motivo: \"${reason}\"`});
