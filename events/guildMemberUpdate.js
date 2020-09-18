@@ -16,6 +16,6 @@ module.exports = (client, oldMember, newMember) => {
             if(oldMember.roles.cache.has(toVerify) && !newMember.roles.cache.has(toVerify)) permission -= 1;
         })
 
-    if(permission < 1) return;
+    if(permission <= 1) return;
     else return removeAllRoles(newMember, colors);
 }
