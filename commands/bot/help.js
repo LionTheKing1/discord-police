@@ -3,6 +3,15 @@ const emoji = require("../../utils/emojis.json");
 const { MessageEmbed } = require("discord.js");
 const fs = require("fs");
 
+function getNumberCommands(client, dir) { 
+    let numberToRemove = 0;
+    dir.filter(x => x.startsWith('noReply')).forEach(directories => {
+        fs.readdirSync(`./commands/${directories}/`).forEach(() => numberToRemove++)    
+    })
+
+    return client.commands.size - numberToRemove
+}
+
 module.exports = class Help extends Comando {
     constructor(client) {
         super(client, {
@@ -16,7 +25,7 @@ module.exports = class Help extends Comando {
         const prefix = client.commandHandler.prefix || "?"
         const helpMessage = new MessageEmbed()
         .setThumbnail("https://i.imgur.com/mDMZRz4.png")
-        .setFooter(`Possuo ${client.commands.size} comandos atualmente!`, client.user.displayAvatarURL())
+        .setFooter(`Possuo ${getNumberCommands(client, fs.readdirSync('./commands/'))} comandos atualmente!`, client.user.displayAvatarURL())
         .setColor("2EFEF7")
         .setTimestamp()
 
