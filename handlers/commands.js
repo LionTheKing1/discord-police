@@ -50,14 +50,15 @@ module.exports = class commandHandler {
 
                 return message.channel.send(`${emoji.interruption} **|** ${message.author} ${messageToSay.join("\n\n")}`)
             }
-
-                    
                     if (command.exclusiveCommand(message))
                         if (command.enabled(message))
                             if((command.missArguments(args) && command.missArguments(args) > 0) || command.missArguments(args) == undefined) 
                                 if (command.botHasPermission(message))
-                                    if (command.hasPermission(message))                            
-                                    command.run(this.client, message, args)
+                                    if (command.hasPermission(message))   
+                                        if (await (await command.cooldownPass(message))[0]){                 
+                                            command.run(this.client, message, args) 
+                                            command.cooldown(message)   } 
+                                        else return message.channel.send(`${emoji.interruption} **|** ${message.author}, você precisa esperar **${await (await command.cooldownPass(message))[1]}** segundos para usar esse comando!`)
                                     else return message.channel.send(message.author, new MissingPermissions(command.needPermissions || "Houve um bug comigo :o"))
                                 else return message.channel.send(message.author, new botMissingPermissions(command.needPermissions || "Houve um bug comigo :o"))
                             else return message.channel.send(message.author, new MissArguments(command, ))

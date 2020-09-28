@@ -3,6 +3,7 @@ const config = require("./config.json")
 const commandHandler = require("./handlers/commands.js")
 const eventHandler = require("./handlers/events.js")
 const initDatabase = require("./database/login/db.js")
+const Cooldown = require('./utils/cooldown.js')
 
 
 class Police extends Client {
@@ -24,7 +25,8 @@ class Police extends Client {
     load() {
         this.commandHandler =  new commandHandler(this);
         this.eventHandler =  new eventHandler(this);
-        this.database =  new initDatabase(this);
+        this.database = new initDatabase(this);
+        new Cooldown();
         this.log();
     }
 

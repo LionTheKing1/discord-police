@@ -1,4 +1,6 @@
-const {ownerID} = require("../config.json")
+const {ownerID} = require("../config.json");
+const Cooldown = require('./cooldown.js');
+const { addCooldown, hasCooldown } = new Cooldown();
 
 module.exports.Comando = class Comando {
     constructor(client, cmd = {}) {
@@ -12,6 +14,8 @@ module.exports.Comando = class Comando {
         this.onlyOwner = cmd.ownlyOwner || false
         this.enable = cmd.enabled || false
         this.needArguments = cmd.needArguments || false
+        this.cooldownType = cmd.cooldownType || "default"
+        this.cooldownTime = cmd.cooldownTime || 4000
     }
 
     hasPermission(message) { 
@@ -38,5 +42,40 @@ module.exports.Comando = class Comando {
         if(this.needArguments) return args.length
         return 
         
+    }
+
+    async cooldownPass(message) {
+        const cooldownTypes = {
+            'default': message.author.id,
+            'guild': message.guild.id,
+            'channel': message.channel.id
+        }
+        const manageCooldown = cooldownTypes[this.cooldownType];
+        const enabledCooldown = await hasCooldown(manageCooldown)
+        if(enabledCooldown) {
+            return [false, Math.abs((enabledCooldown.time - Date.now()) / 1000).toFixed(0)];
+        }
+        else return [true];
+        
+        
+    }
+
+    cooldown(message) {
+        const cooldownTypes = {
+            'default': message.author.id,
+            'guild': message.guild.id,
+            'channel': message.channel.id
+        }
+
+        if(cooldownTypes[this.cooldownType]) {
+            var CooldownID = cooldownTypes[this.cooldownType]
+       }
+
+        else return console.log(new Error(`A command cooldown to "${this.name}" ocorred an error: cooldownType has not defined.`));
+        addCooldown({
+            ID: CooldownID,
+            type: this.cooldownType,
+            time: Date.now() + this.cooldownTime
+        });
     }
 }
