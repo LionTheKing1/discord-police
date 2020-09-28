@@ -1,5 +1,7 @@
 const { Collection } = require("discord.js");
 
+// Créditos ao Djinn pela idealização do cooldown por categorias.
+
 module.exports = class Cooldown {
     constructor() {
         this.collection = new Collection();
