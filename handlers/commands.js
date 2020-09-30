@@ -32,10 +32,12 @@ module.exports = class commandHandler {
         this.client.on('message', async message => {
             if (message.channel.type == "dm") return;
             if (message.author.bot) return;
-            if (message.content == (`<@!${this.client.user.id}>`)) return message.channel.send(message.author, new BotMentions(message.author, this.client, this.prefix))
-            if (!message.content.startsWith(this.prefix)) return;
+
+            const serverConfig = await this.client.database.servers.findServer(message.guild.id);
+            if (message.content == (`<@!${this.client.user.id}>`)) return message.channel.send(message.author, new BotMentions(message.author, this.client, serverConfig.prefix || this.prefix))
+            if (!message.content.startsWith(serverConfig.prefix || this.prefix)) return;
             
-            const commandName = message.content.split(" ").shift().slice(this.prefix.length).toLowerCase();
+            const commandName = message.content.split(" ").shift().slice(serverConfig.prefix.length|| this.prefix.length).toLowerCase();
             const command = this.client.commands.get(commandName) || this.client.commands.get(this.client.aliases.get(commandName))
             const args = message.content.split(" ").slice(1)
             if (!command && commandName.length < 2 || commandName.match(/[a-z]/i) == null) return

@@ -56,8 +56,11 @@ module.exports = class Banir extends Comando {
                 }
 
                 await toChange.save()
-                await (await client.database.servers).deleteServer(message.guild.id)
-                await (await client.database.servers).addServer(toChange)
+               
+                client.database.servers.serverManager[message.guild.id].punishmentLogs = {
+                    enabled: false,
+                    channelID: ""
+                }
                 
             }
             else {
