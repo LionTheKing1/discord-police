@@ -12,14 +12,17 @@ module.exports = class loginDatabase {
     async init() {
         await connect(this.client.config.mongoose.login, { useNewUrlParser: true, useUnifiedTopology: true }).then(() => {
             console.log("Success in DB!");
-            new roleManager(this.client);
-            this.servers = new serverManager(this.client);
             this.ready()
         }).catch(error => console.log(error))
     }
 
         
     ready() {
+        this.client.on('ready', () => {
+             new roleManager(this.client);
+            this.servers = new serverManager(this.client);
+        })
+
         this.client.on('guildDelete', async guild => {
             await modelConfig.findOneAndDelete({"serverID": guild.id})
             this.servers.deleteServer(guild.id)
