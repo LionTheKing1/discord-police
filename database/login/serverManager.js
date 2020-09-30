@@ -12,7 +12,6 @@ module.exports = class serverManager {
     }
 
     async init() {
-        this.client.on('ready', async () => {
 
     (await serverConfig.find({})).forEach(async db => {
             if(!this.client.guilds.cache.get(db.serverID)) {
@@ -26,13 +25,14 @@ module.exports = class serverManager {
         this.client.guilds.cache.forEach(async guild => {
             if(this.serverManager[guild.id]) return;
             
-            await new serverConfig({
+            const configServer = new serverConfig({
                 "serverID": guild.id
-            }).save()
-
-            this.addServer(guild.id)
             })
-        })
+
+            await configServer.save();
+            this.addServer(configServer)
+            })
+        
     }
 }
 

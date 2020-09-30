@@ -24,6 +24,7 @@ module.exports = class Eval extends Comando {
          }
 
         if(evaledMessage instanceof Object) return;
+        if(evaledMessage instanceof Promise) return message.channel.send(new SimpleEmbed('**Promise:** `Pending`'))
         else return message.channel.send(new SimpleEmbed("```js\n" + evaledMessage + "```"))
     }
 }

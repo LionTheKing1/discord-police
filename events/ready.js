@@ -22,9 +22,5 @@ module.exports = async (client) => {
         client.user.setPresence({ activity: presence, status: status})
     }, 30000)
 
-    setInterval(() => {
-
-    }, 10000)
-
 
 }

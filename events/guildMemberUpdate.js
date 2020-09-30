@@ -4,7 +4,7 @@ module.exports = (client, oldMember, newMember) => {
     function removeAllRoles(member, roles) {
         if(!roles instanceof Object) return;
         roles.forEach(role => {
-            if(member.roles.cache.has(role)) member.roles.remove(role)
+            if(member.roles.cache.has(role)) member.roles.remove(role);
         })
     }
 
@@ -14,6 +14,7 @@ module.exports = (client, oldMember, newMember) => {
 
         toVerify.forEach(toVerify => {
             if(oldMember.roles.cache.has(toVerify) && !newMember.roles.cache.has(toVerify)) permission -= 1;
+            if(!oldMember.roles.cache.has(toVerify) && newMember.roles.cache.has(toVerify)) newMember.roles.add("660516816740679681");
             if(newMember.roles.cache.has(toVerify)) permission += 1;
         })
 

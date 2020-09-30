@@ -14,12 +14,12 @@ module.exports = class Teste extends Comando {
             aliases: ["test"],
             onlyOwner: true,
             description: "Comando destinado para testes, de diversas categorias.",
+            cooldownType: "channel",
+            cooldownTime: 30000
   
         })
     }
     async run(client, message, args) {
-        const serverConfig = require('../../database/models/serverconfig.js');
-        
-        console.log(await serverConfig.find({}))
+        message.reply((await client.database.servers.findServer(message.guild.id)).prefix)
     }
 }
