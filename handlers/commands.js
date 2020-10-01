@@ -54,7 +54,8 @@ module.exports = class commandHandler {
             }
 
             if(serverConfig.blockedChannels.length >= 1 && serverConfig.blockedChannels.includes(message.channel.id) && !message.member.hasPermission("MANAGE_MESSAGES") && !message.channel.permissionsFor(message.author).has("MANAGE_MESSAGES")) return message.react("739628740493181000");
-
+            console.log(`[LOGS] Command ${commandName} used in ${message.guild.id}`)
+            
                     if (command.exclusiveCommand(message))
                         if (command.enabled(message))
                             if((command.missArguments(args) && command.missArguments(args) > 0) || command.missArguments(args) == undefined) 
