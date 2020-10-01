@@ -1,10 +1,11 @@
 const { Client, Collection } = require("discord.js")
-const config = require("./config.json")
+const config = process.env
 const commandHandler = require("./handlers/commands.js")
 const eventHandler = require("./handlers/events.js")
 const initDatabase = require("./database/login/db.js")
 const Cooldown = require('./utils/cooldown.js')
 
+require('dotenv').config();
 
 class Police extends Client {
     constructor() {

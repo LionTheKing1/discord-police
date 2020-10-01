@@ -1,4 +1,4 @@
-const {ownerID} = require("../config.json");
+const ownerID = process.env.ownerID
 const Cooldown = require('./cooldown.js');
 const { addCooldown, hasCooldown } = new Cooldown();
 
