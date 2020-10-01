@@ -2,6 +2,7 @@ const { connect } = require("mongoose")
 const modelConfig = require("../models/serverconfig.js")
 const serverManager = require("./serverManager.js")
 const roleManager = require("./roleManager.js");
+require('dotenv').config();
 
 module.exports = class loginDatabase {
     constructor(bot) {
@@ -10,7 +11,7 @@ module.exports = class loginDatabase {
     }
 
     async init() {
-        await connect(this.client.config.mongooseLogin, { useNewUrlParser: true, useUnifiedTopology: true, useMongoClient:true }).then(() => {
+        await connect(this.client.config.mongooseLogin, { useNewUrlParser: true, useUnifiedTopology: true }).then(() => {
             console.log("Success in DB!");
             this.ready()
         }).catch(error => console.log(error))
