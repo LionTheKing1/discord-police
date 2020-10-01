@@ -2,7 +2,7 @@ const { Comando } = require("../../utils/command.js");
 const { MessageEmbed } = require("discord.js");
 const { PunishmentLogs } = require("../../utils/embeds.js");
 const serverDatabase = require("../../database/models/serverconfig.js");
-const { findMember } = require("../../functions.js");
+const { findMember, findUser } = require("../../functions.js");
 
 function DirectMessage(message, member, guild, reason) {
     const messageToSend = new MessageEmbed()
@@ -64,7 +64,7 @@ module.exports = class Banir extends Comando {
                 
             }
             else {
-                punishmentChannel.send(new PunishmentLogs('Banido', message, userToBan.user || client.users.cache.get(args[0]), reason));
+                punishmentChannel.send(new PunishmentLogs('Banido', message, userToBan ? userToBan.user : client.users.cache.get(args[0]), reason));
             }
         }
             await message.guild.members.ban(userToBan || args[0], { reason: `Banido por ${message.author.tag}, motivo: \"${reason}\"`});
