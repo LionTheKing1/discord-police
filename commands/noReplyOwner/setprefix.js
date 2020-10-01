@@ -13,7 +13,7 @@ module.exports = class setPrefix extends Comando {
             aliases: ['setprefix', 'prefix'],
             description: "Altere o meu prefixo em seu servidor!",
             needArguments: true,
-            needPermissions: ['MANAGE_SERVER'],
+            needPermissions: ['MANAGE_GUILD'],
             cooldownType: "guild",
             cooldownTime: 30000
         })

@@ -15,11 +15,11 @@ module.exports = class Teste extends Comando {
             onlyOwner: true,
             description: "Comando destinado para testes, de diversas categorias.",
             cooldownType: "channel",
-            cooldownTime: 30000
+            cooldownTime: 4000
   
         })
     }
     async run(client, message, args) {
-        message.reply((await client.database.servers.findServer(message.guild.id)).prefix)
+        message.reply((await client.database.servers.findServer(message.guild.id)).punishmentLogs.channelID)
     }
 }

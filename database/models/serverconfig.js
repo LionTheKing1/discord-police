@@ -60,6 +60,11 @@ const configSchema = new Schema({
             type: Array,
             default: []
         }
+    },
+
+    blockedChannels: {
+        type: Array,
+        default: []
     }
 
 })

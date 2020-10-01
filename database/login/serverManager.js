@@ -41,6 +41,7 @@ class serverInfo {
         this.serverID = db.serverID,
         this.deleteCommand = db.deleteCommand,
         this.prefix = db.prefix,
+        this.blockedChannels = db.blockedChannels
         this.verificate(db)
     }
     verificate(db) {
