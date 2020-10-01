@@ -17,7 +17,6 @@ class Police extends Client {
     }
 
     async init() {
-        await this.login(this.config.token);
         this.commands = new Collection();
         this.aliases = new Collection();
         this.load();
