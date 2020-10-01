@@ -99,12 +99,10 @@ module.exports = class Config extends Comando {
                 return message.reply("canais limpos com sucesso!");
             }
 
-            if(channelsToAdd.length < 1) return message.channel.send(interruption + 'você precisa adicionar um canal válido!');
-            
+            if(channelsToAdd.length < 1) return message.channel.send(interruption + 'você precisa adicionar um canal válido!');  
             serverConfigDB.blockedChannels.push(...channelsToAdd);
             await serverConfigDB.save();
             client.database.servers.serverManager[message.guild.id].blockedChannels.push(...channelsToAdd);
-            
             return message.reply("adicionado com sucesso!");
         }
 
@@ -113,9 +111,9 @@ module.exports = class Config extends Comando {
             .setAuthor('Configurando o servidor', 'https://i.imgur.com/CfJV7P0.png')
             .setColor('ORANGE')
             .setDescription('Aqui você verá todas as funções configuráveis e personalizáveis para você!')
-            .addField('🔧 Prefixo do servidor:', `Para alterar meu prefixo neste servidor, utilize o comando \`${serverConfig.prefix}configurar prefixo <novoPrefixo>\``)
             .addField('🔧 Canal de punições:', `Para definir um canal no qual irei informar as punições que apliquei nos usuários do servidor, utilize \`${serverConfig.prefix}configurar punições <Canal>\`\n\n${emoji.trash} **Para limpar a definição, utilize o comando \`${serverConfig.prefix}configurar punições limpar\`**`)
-            .addField('🔧 Canais bloqueados:', `Para adicionar um canal na lista de bloqueados (não responderei comandos de pessoas que não possuem a permissão de \`Gerenciar Mensagens\`), utilize \`${serverConfig.prefix}configurar bloquear <canal>\``)
+            .addField('🔧 Canais bloqueados:', `Para adicionar um canal na lista de bloqueados (não responderei comandos de pessoas que não possuem a permissão de \`Gerenciar Mensagens\`), utilize \`${serverConfig.prefix}configurar bloquear <canal>\`\n\n${emoji.trash} **Para limpar a definição, utilize o comando \`${serverConfig.prefix}configurar bloquear limpar\`**`)
+            .addField('🔧 Prefixo do servidor:', `Para alterar meu prefixo neste servidor, utilize o comando \`${serverConfig.prefix}configurar prefixo <novoPrefixo>\``)
             .setFooter(message.guild.name, message.guild.iconURL() || "https://i.imgur.com/zCqxg82.png")
             .setTimestamp()
 
