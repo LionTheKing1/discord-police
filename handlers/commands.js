@@ -41,7 +41,7 @@ module.exports = class commandHandler {
             const command = this.client.commands.get(commandName) || this.client.commands.get(this.client.aliases.get(commandName))
             const args = message.content.split(" ").slice(1)
             if (!command && commandName.length < 2 || commandName.match(/[a-z]/i) == null) return
-            if (!command) {
+            if (!command && serverConfig.blockedChannels.includes(message.channel.id) && !message.member.hasPermission("MANAGE_MESSAGES") && !message.channel.permissionsFor(message.author).has("MANAGE_MESSAGES")) {
                 let messageToSay = [`Comando não encontrado!`]
                 let elementsToCompare = [...this.client.commands.map(cmd => cmd.name)];
                 this.client.aliases.forEach(aliase => elementsToCompare.push(...aliase))
