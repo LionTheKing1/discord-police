@@ -2,7 +2,6 @@ const { connect } = require("mongoose")
 const modelConfig = require("../models/serverconfig.js")
 const serverManager = require("./serverManager.js")
 const roleManager = require("./roleManager.js");
-require('dotenv').config();
 
 module.exports = class loginDatabase {
     constructor(bot) {
