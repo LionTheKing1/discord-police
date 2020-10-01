@@ -10,7 +10,9 @@ module.exports = class Clear extends Comando {
             botNeedPermissions: ["MANAGE_MESSAGES"],
             description: "Limparei o número \`x\` de mensagens no canal! x >= 2 || x =< 100",
             usage: "<amount>",
-            missArguments: true
+            missArguments: true,
+            cooldownType: 'channel',
+            cooldownTime: 30000
         })
     }
 
