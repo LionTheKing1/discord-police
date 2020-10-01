@@ -14,6 +14,7 @@ module.exports = class Config extends Comando {
             aliases: ["configurarbot", "botconfig", "config"],
             needPermissions: ["MANAGE_GUILD"],
             botNeedPermissions: ["MANAGE_GUILD"],
+            description: "Me configure da maneira que você quiser!",
             cooldownType: 'guild',
             cooldownTime: 10000
         })
