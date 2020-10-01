@@ -41,7 +41,9 @@ module.exports = class Banir extends Comando {
             if(userToBan.id == message.author.id || userToBan.id == client.user.id) return message.reply("eu me recuso a fazer isso :sob:")
             if(!userToBan.bannable) return message.reply("eu não tenho permissão para banir esse usuário!");
             if(userToBan.roles.highest.rawPosition >= message.member.roles.highest.rawPosition && message.guild.ownerID !== message.author.id) return message.reply("você não tem permissão de banir esse usuário!");
-            if(!userToBan.user.bot) await userToBan.send(DirectMessage(message, userToBan, message.guild, reason))
+            if(!userToBan.user.bot) try { 
+                await userToBan.send(DirectMessage(message, userToBan, message.guild, reason));
+            } catch(error) {}
         }
 
         const serverConfig = await client.database.servers.findServer(message.guild.id)
