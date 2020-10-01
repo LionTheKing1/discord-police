@@ -40,7 +40,9 @@ module.exports = class Banir extends Comando {
             if(userToKick.id == message.author.id || userToKick.id == client.user.id) return message.reply("eu me recuso a fazer isso :sob:")
             if(!userToKick.kickable) return message.reply("eu não tenho permissão para kickar esse usuário!");
             if(userToKick.roles.highest.rawPosition >= message.member.roles.highest.rawPosition && message.guild.ownerID !== message.author.id) return message.reply("você não tem permissão de kickar esse usuário!");
-            if(!userToKick.user.bot) await userToKick.send(DirectMessage(message, userToKick, message.guild, reason))
+            if(!userToKick.user.bot) try {
+                await userToKick.send(DirectMessage(message, userToKick, message.guild, reason))
+            } catch(error) {}
         } 
         else return message.reply(`procurei por \`${args[0]}\` e não achei! Certeza que é um usuário válido? :thinking:`);
 
