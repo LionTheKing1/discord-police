@@ -52,6 +52,9 @@ module.exports = class commandHandler {
 
                 return message.channel.send(`${emoji.interruption} **|** ${message.author} ${messageToSay.join("\n\n")}`)
             }
+
+            if(serverConfig.blockedChannels.includes(message.channel.id) && !message.member.hasPermission("MANAGE_MESSAGES") && !message.channel.permissionsFor(message.author).has("MANAGE_MESSAGES")) return message.react("739628740493181000");
+
                     if (command.exclusiveCommand(message))
                         if (command.enabled(message))
                             if((command.missArguments(args) && command.missArguments(args) > 0) || command.missArguments(args) == undefined) 

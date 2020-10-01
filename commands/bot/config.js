@@ -13,7 +13,7 @@ module.exports = class Config extends Comando {
             name: "configurar",
             aliases: ["configurarbot", "botconfig", "config"],
             needPermissions: ["MANAGE_GUILD"],
-            botNeedPermissions: ["MANAGE_CHANNELS"],
+            botNeedPermissions: ["MANAGE_GUILD"],
             cooldownType: 'guild',
             cooldownTime: 10000
         })
@@ -89,7 +89,7 @@ module.exports = class Config extends Comando {
         }
 
         else if(argument == 'bloquear' || argument == 'bloquearcanal') {
-            const repliedChannel = message.mentions.channels.keys() || toChange ? [toChange.replace(/<|#|>/g, "")] : [""];
+            const repliedChannel = message.mentions.channels ? message.mentions.channels.map(channel => channel.id) : toChange ? [toChange.replace(/<|#|>/g, "")] : [""];
             const channelsToAdd = repliedChannel.filter(channelID => message.guild.channels.cache.get(channelID));
 
             if(toChange == 'limpar' || toChange == 'clear') {

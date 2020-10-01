@@ -20,6 +20,6 @@ module.exports = class Teste extends Comando {
         })
     }
     async run(client, message, args) {
-        message.reply((await client.database.servers.findServer(message.guild.id)).punishmentLogs.channelID)
+        return message.reply("nada aqui")
     }
 }
