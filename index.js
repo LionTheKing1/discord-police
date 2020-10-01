@@ -3,7 +3,6 @@ const config = process.env
 const commandHandler = require("./handlers/commands.js")
 const eventHandler = require("./handlers/events.js")
 const initDatabase = require("./database/login/db.js")
-const Cooldown = require('./utils/cooldown.js')
 
 require('dotenv').config();
 
@@ -26,12 +25,6 @@ class Police extends Client {
         this.commandHandler =  new commandHandler(this);
         this.eventHandler =  new eventHandler(this);
         this.database = new initDatabase(this);
-        new Cooldown();
-        this.log();
-    }
-
-    log() {
-        console.log(`${this.user.username} conectado com sucesso!`);
     }
 }
 
