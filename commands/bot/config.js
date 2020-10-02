@@ -41,9 +41,7 @@ module.exports = class Config extends Comando {
             serverConfigDB.prefix = toChange;
 
             await serverConfigDB.save()
-            client.database.servers.serverManager[message.guild.id] = {
-                prefix: toChange
-            }
+            client.database.servers.serverManager[message.guild.id].prefix = toChange
 
             await sleep(2000);
             return messageToReply.edit(`✅ ${message.author}, o prefixo do servidor foi alterado para \`${toChange}\` com sucesso!`)

@@ -52,7 +52,6 @@ module.exports = class commandHandler {
 
                 return message.channel.send(`${emoji.interruption} **|** ${message.author} ${messageToSay.join("\n\n")}`)
             }
-            console.log(serverConfig)
 
             if(serverConfig && (serverConfig.blockedChannels).includes(message.channel.id) && !message.member.hasPermission("MANAGE_MESSAGES") && !message.channel.permissionsFor(message.author).has("MANAGE_MESSAGES")) return message.react("739628740493181000");
             console.log(`[LOGS] Command ${commandName} used in ${message.guild.id}`)
