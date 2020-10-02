@@ -13,7 +13,7 @@ module.exports = class Avatar extends Comando {
     }
 
     run(client, message, args) {
-        const userToView = findUser(client, args[0]) || message.author
+        const userToView = findUser(client, args[0] ? args[0] : "") || message.author
         const embedAvatar = new MessageEmbed()
         .setTitle("🖼️ " + userToView.username || userToView.user.username)
         .setDescription(`**[Clique aqui](${userToView.displayAvatarURL({size: 2048, dynamic: true})}) para baixar a imagem.**`)
