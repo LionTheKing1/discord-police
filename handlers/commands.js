@@ -34,7 +34,7 @@ module.exports = class commandHandler {
             if (message.author.bot) return;
 
             const serverConfig = await this.client.database.servers.findServer(message.guild.id);
-            if (message.content == (`<@!${this.client.user.id}>`)) return message.channel.send(message.author, new BotMentions(message.author, this.client, serverConfig.prefix || this.prefix))
+            if (message.content == (`<@!${this.client.user.id}>`)) return message.channel.send(message.author, new BotMentions(message.author, this.client, serverConfig ? serverConfig.prefix : this.prefix))
             if (!message.content.startsWith(serverConfig ? serverConfig.prefix : this.prefix)) return;
             
             const commandName = message.content.split(" ").shift().slice(serverConfig ? serverConfig.prefix.length : this.prefix.length).toLowerCase();
