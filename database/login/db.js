@@ -28,7 +28,7 @@ module.exports = class loginDatabase {
     ready() {
         this.client.on('guildDelete', async guild => {
             await modelConfig.findOneAndDelete({"serverID": guild.id})
-            this.servers.deleteServer(guild.id)
+            this.servers.removeServer(guild.id)
         })
 
         this.client.on('guildCreate', async guild => {
