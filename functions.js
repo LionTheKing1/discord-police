@@ -31,5 +31,43 @@ module.exports = {
         }
 
         return emojiContent;
+    },
+
+    msToDate: function(ms) {
+        if(!ms) return undefined;
+        if(isNaN(ms)) return "Unexpected Letter in parser";
+
+        let dateFormat = [];
+        function date() {
+        const date = {
+            "segundos": ms / 1000,
+            "minutos": ms / 1000 / 60,
+            "horas": ms / 1000 / 60 / 60,
+            "dias": ms / 1000 / 60 / 60 / 24
+        }
+
+        return date;
+    }
+        if(date().dias >= 1) {
+            dateFormat.push(`${date().dias.toFixed(0)}${date().dias > 1 ? " dias" : " dia"}`);
+            ms = ms % 1000 % 60 % 60 % 24
+        }
+
+        if(date().horas >= 1) {
+            dateFormat.push(`${date().horas.toFixed(0)}${date().horas > 1 ? " horas" : " hora"}`);
+            ms = ms % 1000 % 60 % 60
+        }
+
+        if(date().minutos >= 1) {
+            dateFormat.push(`${date().minutos.toFixed(0)}${date().minutos > 1 ? " minutos" : " minuto"}`);
+            ms = ms % 1000 % 60
+        }
+
+        if(date().segundos >= 1) {
+            dateFormat.push(`${date().segundos.toFixed(0)}${date().segundos > 1 ? " segundos" : " segundo"}`);
+            ms = ms % 1000
+        }
+
+        return dateFormat.join(", ")
     }
 }
