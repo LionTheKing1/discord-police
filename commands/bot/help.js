@@ -21,8 +21,8 @@ module.exports = class Help extends Comando {
         });
     } // Automatic Help Command
 
-    run(client, message, args) {
-        const prefix = client.commandHandler.prefix || "?"
+    async run(client, message, args) {
+        const prefix = (await client.database.servers.findServer(message.guild.id)).prefix || client.commandHandler.prefix
         const helpMessage = new MessageEmbed()
         .setThumbnail("https://i.imgur.com/mDMZRz4.png")
         .setFooter(`Possuo ${getNumberCommands(client, fs.readdirSync('./commands/'))} comandos atualmente!`, client.user.displayAvatarURL())
