@@ -24,11 +24,11 @@ module.exports = (client, oldMember, newMember) => {
 
         toVerify.forEach(async toVerify => {
             if(oldMember.roles.cache.has(toVerify) && !newMember.roles.cache.has(toVerify)) {
-                logger({ str: 'perdeu seu cargo de', channelID: '677703411864698890', roleID: toVerify});
+                logger({ str: 'perdeu seu cargo de', channelID: '773963391399493684', roleID: toVerify});
                 permission -= 1;
             }
             if(!oldMember.roles.cache.has(toVerify) && newMember.roles.cache.has(toVerify)) {
-                logger({str: 'ganhou seu cargo de', channelID: '554359970469117953', roleID: toVerify});
+                logger({str: 'ganhou seu cargo de', channelID: '773963391399493684', roleID: toVerify});
                 newMember.roles.add("660516816740679681");
 
             }
