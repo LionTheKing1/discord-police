@@ -1,10 +1,10 @@
 module.exports = (client, oldMember, newMember) => {
     const role = {
-        "channelMember": '773869134999584768',
+        "channelMember": '660516816740679681',
     }
     
     if(oldMember.guild.id !== "505070509528973313") return;
-    if(oldMember.roles.cache.has(role.channelMember) && !newMember.roles.cache.has(role.channelMember)) newMember.channels.cache.get("677703411864698890").send(`<a:DiscordLogoAGif:773883191987273738> **LOGGER |** ${newMember.tag} **(${newMember.id}** perdeu seu cargo de Membro do Canal.)`)
+    if(oldMember.roles.cache.has(role.channelMember) && !newMember.roles.cache.has(role.channelMember)) client.channels.cache.get("677703411864698890").send(`<a:DiscordLogoAGif:773883191987273738> **LOGGER |** ${newMember.user.tag} **(${newMember.id})** perdeu seu cargo de Membro do Canal.`)
     function removeAllRoles(member, roles) {
         if(!roles instanceof Object) return;
         roles.forEach(role => {
