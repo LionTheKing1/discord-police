@@ -1,6 +1,6 @@
 module.exports = (client, oldMember, newMember) => {
     const role = {
-        "channelMember": '660516816740679681',
+        "channelMember": '773869134999584768',
     }
     
     if(oldMember.guild.id !== "505070509528973313") return;
