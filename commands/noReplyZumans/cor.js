@@ -43,7 +43,7 @@ module.exports = class Cor extends Comando {
     }
     async run(client, message, args) {
         if(message.guild.id !== '505070509528973313') return;
-        const whitelist = ["705935660036391097", "708094667312332840", "642480977637277718", "554369669524357131", "718949107380650076", "657032404413710356"];
+        const whitelist = ["705935660036391097", "708094667312332840", "642480977637277718", "554369669524357131", "718949107380650076", "657032404413710356", "773869134999584768"];
         const colorSelected = args.join(" ").toLowerCase()
         let hasRoles = 0;
 
