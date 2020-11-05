@@ -14,13 +14,15 @@ module.exports = class addNumber extends Comando {
     }
 
     async run(client, message, args) {
+        if(message.guild.id !== '505070509528973313') return;
+
         const userID = args[0].replace(/<|@|!|>/g, '');
         const number = args.slice(1).join(' ')
 
         if(!userID || !message.guild.members.cache.get(userID)) return message.reply('você precisa inserir um usuário válido!');
 
         const userHasNumber = await adcNumber.findOne({userID: userID});
-        
+
         if(userHasNumber) return message.reply(`esse usuário já está registrado com o número de \`${userHasNumber.number}\`!`);
         if(!number || number.length < 1) return message.reply('você precisa inserir um número para o usuário!');
         if(number == 'apagar' || number == 'delete') {
