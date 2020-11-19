@@ -23,8 +23,7 @@ module.exports = class serverManager {
         })
 
         this.client.guilds.cache.forEach(async guild => {
-            if(!this.serverManager[guild.id]) {
-            
+            if(!await this.serverManager[guild.id]) {
             const configServer = new serverConfig({
                 "serverID": guild.id
             })
