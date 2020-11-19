@@ -1,4 +1,4 @@
-const modelConfig = require("../models/serverconfig.js")
+const modelConfig = require("../database/models/serverconfig.js")
 
 module.exports = async (client, guild) => {
         if(!await modelConfig.findOne({
