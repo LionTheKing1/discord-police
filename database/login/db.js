@@ -17,7 +17,6 @@ module.exports = class loginDatabase {
                 new roleManager(this.client);
                 new Cooldown();
                 this.servers = new serverManager(this.client);
-                this.ready()
             })
            
         }).catch(error => console.log(error))
