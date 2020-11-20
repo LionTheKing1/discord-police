@@ -46,7 +46,7 @@ module.exports = class Cor extends Comando {
         if(message.guild.id == '505070509528973313') {
             var whitelist = ["776061906401755137","705935660036391097", "708094667312332840", "642480977637277718", "554369669524357131", "718949107380650076", "657032404413710356", "773869134999584768"];
         }
-        else if(message.guild.id == '760646077215677441') {
+        else if(message.guild.id == '760646087215677441') {
             colors = {
                 'preto': '778990014973214740',
                 'branco': '778963672500404277',
@@ -60,13 +60,12 @@ module.exports = class Cor extends Comando {
           }
            whitelist = ['760647711417696256', '768265291221565440','760647712575455245','760647713691402251','761070956344508448','760647717411356733','765720932546773024','769759353216434187','769776730663550988','769758575135424523','769785412054679573', '769776050116755486','769788053064908834'];
         } else return;
-        
+
         const colorSelected = args.join(" ").toLowerCase()
         let hasRoles = 0;
 
         whitelist.forEach(roleID => {
             if(message.member.roles.cache.has(roleID)) hasRoles++;
-            return;
         });
 
         if(hasRoles < 1 && !message.member.hasPermission("MANAGE_ROLES")) return message.reply("você não pode utilizar esse comando.");
