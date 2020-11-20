@@ -2,7 +2,8 @@ const { Comando } = require("../../utils/command.js");
 const emoji = require("../../utils/emojis.json");
 const { findBestMatch } = require("string-similarity");
 const { SimpleEmbed } = require("../../utils/embeds.js");
-const colors = { 
+
+var colors = { 
     "verde lima": "660565736569176065",
     "vermelho": "657386776205459473",
     "dourado": "657386775768989717",
@@ -42,8 +43,24 @@ module.exports = class Cor extends Comando {
         })
     }
     async run(client, message, args) {
-        if(message.guild.id !== '505070509528973313') return;
-        const whitelist = ["776061906401755137","705935660036391097", "708094667312332840", "642480977637277718", "554369669524357131", "718949107380650076", "657032404413710356", "773869134999584768"];
+        if(message.guild.id == '505070509528973313') {
+            var whitelist = ["776061906401755137","705935660036391097", "708094667312332840", "642480977637277718", "554369669524357131", "718949107380650076", "657032404413710356", "773869134999584768"];
+        }
+        else if(message.guild.id == '760646077215677441') {
+            colors = {
+                'preto': '778990014973214740',
+                'branco': '778963672500404277',
+                'amarelo': '778964039547879464',
+                'laranja': '778964499587530763',
+                'roxo': '778736037890752564',
+                'rosa Suave': '778963574633791568',
+                'azul Escuro': '778963681798651924',
+                'verde Escuro': '778963688681373736',
+                'verde Lima': '778253898372743189',
+          }
+           whitelist = ['760647711417696256', '768265291221565440','760647712575455245','760647713691402251','761070956344508448','760647717411356733','765720932546773024','769759353216434187','769776730663550988','769758575135424523','769785412054679573', '769776050116755486','769788053064908834'];
+        } else return;
+        
         const colorSelected = args.join(" ").toLowerCase()
         let hasRoles = 0;
 
@@ -52,7 +69,7 @@ module.exports = class Cor extends Comando {
             return;
         });
 
-        if(hasRoles < 1 && !message.member.hasPermission("MANAGE_ROLES")) return message.reply("você não pode utilizar esse comando. Necessita de um dos cargos: ``Administrador, Parceiro, Apoiador, Nitro Booster, Youtuber ou Level 100+.`` ");
+        if(hasRoles < 1 && !message.member.hasPermission("MANAGE_ROLES")) return message.reply("você não pode utilizar esse comando.");
         if(!colors[colorSelected] && colorSelected) return message.channel.send(`${emoji.interruption} **|** ${message.author} você não especificou uma cor válida!\n\n${await similarityColor(colorSelected)}`);
         if(!colors[colorSelected] && !colorSelected) return message.channel.send(message.author, new SimpleEmbed(`Cores disponíveis: \`${Object.keys(colors).join(", ")}\``));
         if(message.member.roles.cache.has(colors[colorSelected])) {
