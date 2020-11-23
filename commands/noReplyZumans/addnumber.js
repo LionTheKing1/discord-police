@@ -18,17 +18,18 @@ module.exports = class addNumber extends Comando {
 
         const userID = args[0].replace(/<|@|!|>/g, '');
         const number = args.slice(1).join(' ')
-
+        console.log(number)
         if(!userID || !message.guild.members.cache.get(userID)) return message.reply('você precisa inserir um usuário válido!');
 
         const userHasNumber = await adcNumber.findOne({userID: userID});
 
-        if(userHasNumber) return message.reply(`esse usuário já está registrado com o número de \`${userHasNumber.number}\`!`);
-        if(!number || number.length < 1) return message.reply('você precisa inserir um número para o usuário!');
         if(number == 'apagar' || number == 'delete') {
             await adcNumber.findOneAndDelete({ userID: userID })
             return message.reply('successful deleted!')
         }
+        else if (userHasNumber) return message.reply(`esse usuário já está registrado com o número de \`${userHasNumber.number}\`!`);
+        else if(!number || number.length < 1) return message.reply('você precisa inserir um número para o usuário!');
+
 
 
         await (new adcNumber({
