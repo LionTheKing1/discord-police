@@ -5,6 +5,6 @@ module.exports = async (client, message) => {
     }
 
     if(message.channel.id == '783011535450669067') {
-        await message.delete()
+        await message.delete({ timeout: 10000 })
     }
 }
