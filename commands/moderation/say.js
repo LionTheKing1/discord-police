@@ -27,7 +27,7 @@ module.exports = class Say extends Comando {
         catch(error) {
                 messageToSay = messageToFind.join(" ")
         }
-        
+    
         return channelToSay.send(messageToSay).catch(error => {
             message.channel.send(message.author, new EmbedError(error))
         })
