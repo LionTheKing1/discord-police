@@ -81,6 +81,7 @@ module.exports = class Cor extends Comando {
         }
 
         await removeAllColors(message);
+        console.log(colors[colorSelected])
         await message.member.roles.add(colors[colorSelected]);
         return message.reply("cor entregue com sucesso!");
     }
