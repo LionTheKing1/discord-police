@@ -1,5 +1,6 @@
 const { Comando } = require("../../utils/command.js");
 const { MissArguments } = require("../../utils/embeds.js");
+const emoji = require('../../utils/emojis.json');
 
 module.exports = class Clear extends Comando {
     constructor(client) {
@@ -17,21 +18,19 @@ module.exports = class Clear extends Comando {
     }
 
     async run(client, message, args) {
-        const numberToClear = Number(args[0]).toFixed(0)
-        if(isNaN(numberToClear) || numberToClear < 2 || numberToClear > 100) return message.channel.send(message.author, new MissArguments(client.commands.get("clear")));
-        const messagesToClear = await message.channel.messages.fetch({ limit: numberToClear }).then(msg => msg.filter(x => !x.pinned));
-        const botMessage = await message.channel.send(`Limpando \`${numberToClear}\` mensagens...`);
-        await message.channel.bulkDelete(messagesToClear, { filterOld: true }).then(async msg => {
-            const clearedMessages = msg.size,
-             oldMessages = messagesToClear.size - clearedMessages,
-              pinnedMessages = numberToClear - messagesToClear.size,
-               finalMessage = [`\`${clearedMessages}\` mensagens excluídas com sucesso!`];
+        const numberSelected = Number(args[0]).toFixed(0); 
+        if(isNaN(numberSelected)) return message.channel.send(`${emoji.interruption} **|** ${message.author}, você deve inserir um número válido!`);
+        if(numberSelected < 2 || numberSelected > 100) return message.channel.send(`${emoji.interruption} **|** ${message.author}, você deve inserir um número de 2 até 100!`);
 
-               if(oldMessages > 0) finalMessage.push(`\n*Foram encontradas \`${oldMessages}\` mensagens com mais de duas semanas.*`);
-               if(pinnedMessages > 0) finalMessage.push(`\n*Foram mantidas \`${pinnedMessages}\` mensagens por serem fixadas.*`);
-               if(clearedMessages == 0) return await botMessage.edit("Eu não encontrei nenhuma mensagem para apagar!");
-               
-              return await botMessage.edit(finalMessage.join(" "));
-        })
+        const messageToSay = await message.channel.send(`${emoji.waiting} **|** Apagando mensagens...`)
+        const fetchedMessages = await message.channel.messages.fetch({ limit: numberSelected });
+        const pinnedMessages = fetchedMessages.filter(msg => msg.pinned)
+
+        return message.channel.bulkDelete(fetchedMessages.filter(msg => !msg.pinned && msg !== messageToSay), { filterOld: true }).then(async messages => {
+            const oldMessages = {
+                length: numberSelected - pinnedMessages.size - messages.size - 1
+            }
+            await messageToSay.edit(`${emoji.successful} **|** ${message.author}, \`${messages.size}\` mensagens apagadas com sucesso!${pinnedMessages.size > 0 ? `\n📌 **|** \`${pinnedMessages.size}\` mensagens não foram apagadas por serem fixadas` : ''}${oldMessages.length > 0 ? `\n⏲️ **|** \`${oldMessages.length}\` mensagens não foram apagadas por terem mais de 14 dias` : ''}`);
+        });
     }
 }
