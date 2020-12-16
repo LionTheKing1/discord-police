@@ -9,7 +9,7 @@ module.exports = class tempRole {
     constructor(client) {
         this.client = client;
         this.roles = new Collection();
-        this.client.addTempRole = (role) => this.roles[role._id] = new TempRole(role);
+        this.client.addTempRole = (role) => this.roles[role.userID + '-' + role.roleID] = new TempRole(role);
         this.init();
 
     }
@@ -17,7 +17,7 @@ module.exports = class tempRole {
     async init() {
     const allTempRoles = await serverConfig.find({})
         allTempRoles.forEach(x => {
-            this.roles[x._id] = new TempRole(x);
+            this.roles[x.userID + '-' + x.roleID] = new TempRole(x);
         })
 
         setInterval(() => { this.ready() }, 1_000)
@@ -29,8 +29,8 @@ module.exports = class tempRole {
             const guild = this.client.guilds.cache.get(toVerify.serverID);
             const member = guild.members.cache.get(toVerify.userID);
             if (!toVerify.expirado && member.roles.cache.has(toVerify.roleID)) continue;
-            
-            delete this.roles[role._id];
+
+            delete this.roles[toVerify.userID + '-' + toVerify.roleID];
             await serverConfig.findOneAndDelete(role._id);
  
             if(member.roles.cache.has(toVerify.roleID)) {

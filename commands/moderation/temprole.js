@@ -1,7 +1,9 @@
 const { Comando } = require("../../utils/command.js");
 const { findMember } = require("../../functions.js");
 const { MissArguments } = require("../../utils/embeds.js");
-const serverConfig = require("../../database/models/temprole.js")
+const serverConfig = require("../../database/models/temprole.js");
+const emoji = require('../../utils/emojis.json');
+const moment = require('moment');
 const ms = require("milliseconds-parser")();
 
 module.exports = class tempRole extends Comando {
@@ -41,6 +43,6 @@ module.exports = class tempRole extends Comando {
         await temprole.save();
         await client.addTempRole(temprole);
         await memberToAddRole.roles.add(roleToAdd.id);
-        return message.reply("cargo temporário adicionado com sucesso!");
+        return message.channel.send(`${emoji.successful} **|** ${message.author}, cargo temporário adicionado com sucesso! Irá se expirar em: \`${moment(Date.now() + time).format('DD/MM/YYYY HH:mm:ss')}\`.`);
     }
 }

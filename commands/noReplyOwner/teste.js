@@ -20,6 +20,6 @@ module.exports = class Teste extends Comando {
         })
     }
     async run(client, message, args) {
-        return message.reply("nada aqui")
+        console.log(await client.database.temproles.roles[message.author.id+'-'+'773422714505527336'])
     }
 }
