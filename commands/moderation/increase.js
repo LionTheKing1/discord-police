@@ -55,7 +55,7 @@ module.exports = class Increase extends Comando {
                         else {
                             timeDefined.expiredAt = Number(timeArgument) + Number(timeDefined.expiredAt);
                             await (await timeModel.findByIdAndUpdate(timeDefined._id, { expiredAt: timeDefined.expiredAt })).save();
-                            return message.channel.send(`${emoji.successful} **|** ${message.author}, tempo definido com sucesso! O cargo irá se expirar em: \`${moment(new Date(timeDefined.expiredAt)).format('DD/MM/YYYY HH:mm:ss')}\``)
+                            return message.channel.send(`${emoji.successful} **|** ${message.author}, tempo adicionado com sucesso! O cargo irá se expirar em: \`${moment(new Date(timeDefined.expiredAt)).format('DD/MM/YYYY HH:mm:ss')}\`.`)
                         } 
         
     }
