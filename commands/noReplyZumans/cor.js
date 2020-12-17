@@ -59,12 +59,12 @@ module.exports = class Cor extends Comando {
         if(!colors[colorSelected] && !colorSelected) return message.channel.send(message.author, new SimpleEmbed(`Cores disponíveis: \`${Object.keys(colors).join(", ")}\``));
         if(message.member.roles.cache.has(colors[colorSelected])) {
             await message.member.roles.remove(colors[colorSelected]);
-            return message.reply("cor removida com sucesso!");
+            return message.channel.send(`${emoji.successful} **|** ${message.author}, cor removida com sucesso!`)
         }
 
         await removeAllColors(message);
         console.log(colors[colorSelected])
         await message.member.roles.add(colors[colorSelected]);
-        return message.reply("cor entregue com sucesso!");
+        return message.channel.send(`${emoji.successful} **|** ${message.author}, cor \`${colorSelected}\` entregue com sucesso!`);
     }
 }
