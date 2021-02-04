@@ -63,7 +63,7 @@ module.exports = class Cor extends Comando {
         }
 
         await removeAllColors(message);
-        console.log(colors[colorSelected])
+        console.log(colors[colorSelected]);
         await message.member.roles.add(colors[colorSelected]);
         return message.channel.send(`${emoji.successful} **|** ${message.author}, cor \`${colorSelected}\` entregue com sucesso!`);
     }
