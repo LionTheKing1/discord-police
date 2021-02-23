@@ -28,7 +28,7 @@ module.exports = class tempRole {
             const toVerify = this.roles[role];
             const guild = await this.client.guilds.cache.get(toVerify.serverID);
             const member = guild.members.cache.get(toVerify.userID);
-            if (!toVerify.expirado && member.roles.cache.has(toVerify.roleID)) continue;
+            if (!member || !toVerify.expirado && member.roles.cache.has(toVerify.roleID)) continue;
 
             delete this.roles[toVerify.userID + '-' + toVerify.roleID];
             await serverConfig.findOneAndDelete(role._id);
