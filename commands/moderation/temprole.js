@@ -24,7 +24,6 @@ module.exports = class tempRole extends Comando {
 
         const roleToAdd = message.guild.roles.cache.get(args[1].replace(/<|@|&|>/g, ""));
         if(!roleToAdd) return message.reply("você precisa adicionar um cargo válido!");
-        if(memberToAddRole.roles.cache.has(roleToAdd.id)) return message.reply("o usuário já possui esse cargo!");
         if(message.member.roles.highest.rawPosition <= roleToAdd.rawPosition) return message.reply("você não pode adicionar cargos maiores/igual ao seu!");
         if(!roleToAdd.editable) return message.reply("eu não consigo entregar o cargo, é maior que o meu :sob:")
 
