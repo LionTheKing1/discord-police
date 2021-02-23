@@ -29,7 +29,6 @@ module.exports = (client, oldMember, newMember) => {
             }
             if(!oldMember.roles.cache.has(toVerify) && newMember.roles.cache.has(toVerify)) {
                 logger({str: 'ganhou seu cargo de', channelID: '773963391399493684', roleID: toVerify});
-                newMember.roles.add("660516816740679681");
 
             }
             if(newMember.roles.cache.has(toVerify)) permission += 1;
