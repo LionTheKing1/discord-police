@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 const sleep = (milliseconds) => {
     return new Promise(resolve => setTimeout(resolve, milliseconds))
   }
@@ -15,4 +16,3 @@ module.exports = async (client, member) => {
         await sleep(3_000);
         return member.kick(`Account age isn't reached yet.`);*/
     }
-}
