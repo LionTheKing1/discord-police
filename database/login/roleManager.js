@@ -15,12 +15,7 @@ module.exports = class tempRole {
     }
 
     async init() {
-    const allTempRoles = await serverConfig.find({})
-        allTempRoles.forEach(x => {
-            this.roles[x.userID + '-' + x.roleID] = new TempRole(x);
-        })
-
-        setInterval(() => { this.ready() }, 1_000)
+    // void
     }
 
    async ready() {
